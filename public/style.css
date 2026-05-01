@@ -1,34 +1,115 @@
-* { margin:0; padding:0; box-sizing:border-box; font-family:system-ui; }
-body { background:#f8f9fa; padding:2rem; }
-.container { max-width:900px; margin:0 auto; }
-h1 { font-size:2rem; margin-bottom:0.5rem; color:#222; }
-.subtitle { color:#666; margin-bottom:2rem; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
 
-.card {
-  background:white;
-  padding:1.2rem;
-  border-radius:10px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.08);
-  margin-bottom:1rem;
-}
-.form-card { display:flex; flex-direction:column; gap:0.6rem; }
-input, textarea { padding:0.7rem; border:1px solid #ddd; border-radius:6px; }
-button { background:#2563eb; color:white; border:none; padding:0.7rem; border-radius:6px; cursor:pointer; }
+/* 洞洞板背景 */
+body {
+  background-color: #c0b8ac;
+  background-image: radial-gradient(#a8a094 7%, transparent 7%);
+  background-size: 34px 34px;
+  min-height: 100vh;
+  padding: 4rem 2rem;
 
-.tool-wall {
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
-  gap:1rem;
-  margin-top:2rem;
+  /* 整页进场动画 */
+  opacity: 0;
+  animation: pageFadeIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
-.tool-card {
-  background:white;
-  padding:1rem;
-  border-radius:10px;
-  border-left:4px solid #2563eb;
+
+/* Apple 官网级进场 */
+@keyframes pageFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.tool-card h3 { margin-bottom:0.4rem; }
-.tool-card a { color:#2563eb; text-decoration:none; }
-.tool-card .category { font-size:0.8rem; color:#888; margin:0.3rem 0; }
-.tool-card .actions { margin-top:0.8rem; display:flex; gap:0.5rem; }
-.tool-card button { padding:0.4rem 0.6rem; font-size:0.8rem; }
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* 标题动画 */
+.title {
+  text-align: center;
+  margin-bottom: 4rem;
+  opacity: 0;
+  animation: titleSlide 0.8s ease 0.2s forwards;
+}
+
+@keyframes titleSlide {
+  to { opacity: 1; }
+}
+
+.title h1 {
+  font-size: 52px;
+  font-weight: 600;
+  color: #1d1d1f;
+  letter-spacing: -1px;
+}
+
+/* 便签墙网格 */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 26px;
+}
+
+/* 便签样式 + 逐个弹出 */
+.note {
+  padding: 30px 26px;
+  border-radius: 22px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  opacity: 0;
+  animation: notePop 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  transition: transform 0.2s ease;
+}
+
+.note:hover {
+  transform: translateY(-4px);
+}
+
+/* 便签依次进场（核心效果）*/
+.note:nth-child(1) { animation-delay: 0.4s; }
+.note:nth-child(2) { animation-delay: 0.5s; }
+.note:nth-child(3) { animation-delay: 0.6s; }
+.note:nth-child(4) { animation-delay: 0.7s; }
+.note:nth-child(5) { animation-delay: 0.8s; }
+.note:nth-child(6) { animation-delay: 0.9s; }
+
+@keyframes notePop {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+/* 便签颜色 */
+.note.yellow { background: #ffdd57; color: #222; }
+.note.blue   { background: #57c4ff; color: #222; }
+.note.pink   { background: #ff8adc; color: #222; }
+.note.green  { background: #89e777; color: #222; }
+.note.white  { background: #ffffff; color: #222; }
+
+.note h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.note p {
+  font-size: 15px;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.highlight {
+  background: linear-gradient(90deg, #4a8cf7, #ff6b8b, #f8c838);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

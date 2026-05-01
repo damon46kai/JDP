@@ -1,28 +1,42 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Jane Doe's Pegboard • 工具墙</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jane Doe's Pegboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>🧩 Jane Doe's Pegboard</h1>
-    <p class="subtitle">Your personal tool wall • 私人工具黄页</p>
 
-    <!-- 添加工具表单 -->
-    <div class="card form-card">
-      <input id="name" placeholder="工具名称" required>
-      <input id="url" placeholder="网址链接" required>
-      <input id="category" placeholder="分类：开发 / AI / 设计 / 效率">
-      <textarea id="desc" placeholder="简单描述"></textarea>
-      <button onclick="addTool()">Add to Pegboard</button>
+  <div class="container">
+    <div class="title">
+      <h1><span class="highlight">Jane Doe's Pegboard</span></h1>
+      <!-- <color>🔧🔧🔧🔧</color> -->
     </div>
 
-    <!-- 工具墙 -->
-    <div id="toolWall" class="tool-wall"></div>
+    <div class="notes-grid">
+      <div class="note yellow">
+        <h2>Dev Tools</h2>
+        <p>Development module for coding tools</p>
+      </div>
+      <div class="note blue">
+        <h2>AI Tools</h2>
+        <p>AI & automation resources hub</p>
+      </div>
+      <div class="note pink">
+        <h2>Design</h2>
+        <p>Design resources & assets</p>
+      </div>
+      <div class="note green">
+        <h2>Productivity</h2>
+        <p>Workflow & efficiency tools</p>
+      </div>
+      <div class="note white">
+        <h2>References</h2>
+        <p>Documents & learning links</p>
+      </div>
+    </div>
   </div>
 
-  <script src="app.js"></script>
 </body>
 </html>

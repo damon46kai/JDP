@@ -1,0 +1,14 @@
+name: Build and Run Docker
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t pegboard .
+      - name: Run container
+        run: docker run -d -p 3000:3000 pegboard
