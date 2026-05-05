@@ -7,14 +7,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<div class="splash-title">Jane Doe's Pegboard</div> 
   <div class="container">
     <div class="title">
       <h1><span class="highlight">Jane Doe's Pegboard</span></h1>
       <!-- <color>🛠️🛠️🛠️</color> -->
     </div>
 
-    <div class="notes-grid">
+    <!-- <div class="notes-grid">
       <div class="note yellow">
         <h2>Dev Tools</h2>
         <p>Development module for coding tools</p>
@@ -35,8 +35,17 @@
         <h2>References</h2>
         <p>Documents & learning links</p>
       </div>
-    </div>
+    </div> -->
   </div>
+<script>
+  fetch('/api/count')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('count').textContent = data.total;
+    });
 
+  // 每次访问 +1
+  fetch('/api/visit');
+</script>
 </body>
 </html>
