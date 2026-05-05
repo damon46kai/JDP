@@ -31,8 +31,9 @@ body {
   align-items: center;
   justify-content: center;
 
-  font-size: 70px;
-  font-weight: bold;
+  font-size: 100px;
+  font-weight: 750;
+  letter-spacing: 2px;
 
    background: linear-gradient(90deg, #4a8cf7, #ff6b8b, #f8c838);
   -webkit-background-clip: text;
