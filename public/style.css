@@ -31,7 +31,7 @@ body {
   align-items: center;
   justify-content: center;
 
-  font-size: 100px;
+  font-size: clamp(50px, 11vw, 90px);
   font-weight: 750;
   letter-spacing: 2px;
 
