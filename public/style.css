@@ -5,63 +5,103 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* 洞洞板背景 */
+/* 背景 */
 body {
-  background-color: #c0b8ac;
-  background-image: radial-gradient(#a8a094 7%, transparent 7%);
+  background-color: #2a2929;
+  background-image: radial-gradient(#a8a094 4%, transparent 1%);
   background-size: 34px 34px;
   min-height: 100vh;
   padding: 4rem 2rem;
 
-  /* 整页进场动画 */
-  opacity: 0;
-  animation: pageFadeIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  /* 修复：让 body 不挡住标题 */
+  position: relative;
+  z-index: 0;
 }
 
-/* Apple 官网级进场 */
-@keyframes pageFadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ======================
+中间开场大标题（必显示！）
+======================= */
+.splash-title {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: clamp(50px, 18vw, 90px);
+  font-weight: 750;
+  letter-spacing: 2px;
+
+    /* 文字左右内边距，防止贴边 */
+  padding: 0.5vw;
+  /* 保证文字换行也好看 */
+  text-align: center;
+  white-space: pre-wrap;
+
+   background: linear-gradient(90deg, #4a8cf7, #ff6b8b, #f8c838);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  z-index: 9999 !important; /* 强制在最上层 */
+  animation: splashAnim 2.4s ease-in-out forwards;
 }
 
+@keyframes splashAnim {
+  0%   { opacity: 0; transform: scale(1.3); }
+  40%  { opacity: 1; transform: scale(1); }
+  65%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.9); }
+}
+
+/* ======================
+主内容：等中间标题播完再显示
+======================= */
 .container {
   max-width: 1100px;
   margin: 0 auto;
+  opacity: 0;
+  animation: containerShow 1s ease forwards;
+  animation-delay: 2.45s;
+  position: relative;
+  z-index: 1;
 }
 
-/* 标题动画 */
+@keyframes containerShow {
+  to { opacity: 1; }
+}
+
+/* 顶部标题 */
 .title {
   text-align: center;
   margin-bottom: 4rem;
-  opacity: 0;
-  animation: titleSlide 0.8s ease 0.2s forwards;
-}
-
-@keyframes titleSlide {
-  to { opacity: 1; }
 }
 
 .title h1 {
   font-size: 52px;
   font-weight: 600;
-  color: #1d1d1f;
   letter-spacing: -1px;
 }
 
-/* 便签墙网格 */
+.highlight {
+  background: linear-gradient(90deg, #4a8cf7, #ff6b8b, #f8c838);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ======================
+便签墙
+======================= */
 .notes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   gap: 26px;
 }
 
-/* 便签样式 + 逐个弹出 */
 .note {
   padding: 30px 26px;
   border-radius: 22px;
@@ -75,20 +115,17 @@ body {
   transform: translateY(-4px);
 }
 
-/* 便签依次进场（核心效果）*/
-.note:nth-child(1) { animation-delay: 0.4s; }
-.note:nth-child(2) { animation-delay: 0.5s; }
-.note:nth-child(3) { animation-delay: 0.6s; }
-.note:nth-child(4) { animation-delay: 0.7s; }
-.note:nth-child(5) { animation-delay: 0.8s; }
-.note:nth-child(6) { animation-delay: 0.9s; }
+.note:nth-child(1) { animation-delay: 5.2s; }
+.note:nth-child(2) { animation-delay: 5.4s; }
+.note:nth-child(3) { animation-delay: 5.6s; }
+.note:nth-child(4) { animation-delay: 5.8s; }
+.note:nth-child(5) { animation-delay: 6.0s; }
 
 @keyframes notePop {
   from { transform: translateY(30px); opacity: 0; }
   to   { transform: translateY(0); opacity: 1; }
 }
 
-/* 便签颜色 */
 .note.yellow { background: #ffdd57; color: #222; }
 .note.blue   { background: #57c4ff; color: #222; }
 .note.pink   { background: #ff8adc; color: #222; }
@@ -105,11 +142,4 @@ body {
   font-size: 15px;
   line-height: 1.5;
   opacity: 0.9;
-}
-
-.highlight {
-  background: linear-gradient(90deg, #4a8cf7, #ff6b8b, #f8c838);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }

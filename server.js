@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const Tool = require('./models/Tool');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,34 +11,39 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-// 连接 MongoDB
-// mongoose.connect(process.env.MONGO_URI)
-//   .then(() => console.log('✅ MongoDB 连接成功'))
-//   .catch(err => console.error('❌ MongoDB 连接失败', err));
+// 连接 MongoDB（本地，你Compass直接用）
+mongoose.connect('mongodb://localhost:27017/pegboard')
+  .then(() => console.log('✅ MongoDB 本地连接成功'))
+  .catch(err => console.error('❌ MongoDB 连接失败', err));
+
+// ---------------- 访问统计 Schema ----------------
+const VisitSchema = new mongoose.Schema({
+  page: String,
+  count: { type: Number, default: 0 },
+});
+
+const Visit = mongoose.model('Visit', VisitSchema);
 
 // ---------------- API ----------------
-// 获取所有工具
-app.get('/api/tools', async (req, res) => {
-  const tools = await Tool.find().sort({ createdAt: -1 });
-  res.json(tools);
+
+// 1. 访问 +1
+app.get('/api/visit', async (req, res) => {
+  let visit = await Visit.findOne({ page: 'home' });
+  
+  if (!visit) {
+    visit = await Visit.create({ page: 'home', count: 1 });
+  } else {
+    visit.count += 1;
+    await visit.save();
+  }
+
+  res.json({ total: visit.count });
 });
 
-// 添加工具
-app.post('/api/tools', async (req, res) => {
-  const tool = await Tool.create(req.body);
-  res.json(tool);
-});
-
-// 删除工具
-app.delete('/api/tools/:id', async (req, res) => {
-  await Tool.findByIdAndDelete(req.params.id);
-  res.json({ success: true });
-});
-
-// 更新工具
-app.put('/api/tools/:id', async (req, res) => {
-  const tool = await Tool.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  res.json(tool);
+// 2. 获取数量
+app.get('/api/count', async (req, res) => {
+  const visit = await Visit.findOne({ page: 'home' });
+  res.json({ total: visit ? visit.count : 0 });
 });
 
 app.listen(PORT, () => {
