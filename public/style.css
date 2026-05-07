@@ -31,12 +31,12 @@ body {
   align-items: center;
   justify-content: center;
 
-  font-size: clamp(50px, 11vw, 90px);
+  font-size: clamp(50px, 18vw, 90px);
   font-weight: 750;
   letter-spacing: 2px;
 
     /* 文字左右内边距，防止贴边 */
-  padding: 0 5vw;
+  padding: 0.5vw;
   /* 保证文字换行也好看 */
   text-align: center;
   white-space: pre-wrap;
