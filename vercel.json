@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "server.remote.js",
+      "src": "app.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "server.remote.js"
+      "dest": "app.js"
     }
   ]
 }
