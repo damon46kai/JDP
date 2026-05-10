@@ -1,15 +1,18 @@
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const cors = require('cors');
+const { Redis } = require('@upstash/redis');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-// 中间件
 app.use(cors());
-app.use(express.json());
 app.use(express.static('public'));
+
+const redis = Redis.fromEnv();
+
+app.get('/', (req, res) => {
+  res.send('✅ 服务器启动成功！');
+});
 
 // 连接 MongoDB（本地，你Compass直接用）
 // mongoose.connect('mongodb://localhost:27017/pegboard')
