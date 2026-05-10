@@ -1,10 +1,10 @@
 {
   "name": "jane-doe-pegboard",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "server.remote.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon server.remote.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
