@@ -12,17 +12,17 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // 连接 MongoDB（本地，你Compass直接用）
-mongoose.connect('mongodb://localhost:27017/pegboard')
-  .then(() => console.log('✅ MongoDB 本地连接成功'))
-  .catch(err => console.error('❌ MongoDB 连接失败', err));
+// mongoose.connect('mongodb://localhost:27017/pegboard')
+//   .then(() => console.log('✅ MongoDB 本地连接成功'))
+//   .catch(err => console.error('❌ MongoDB 连接失败', err));
 
 // ---------------- 访问统计 Schema ----------------
-const VisitSchema = new mongoose.Schema({
-  page: String,
-  count: { type: Number, default: 0 },
-});
+// const VisitSchema = new mongoose.Schema({
+//   page: String,
+//   count: { type: Number, default: 0 },
+// });
 
-const Visit = mongoose.model('Visit', VisitSchema);
+// const Visit = mongoose.model('Visit', VisitSchema);
 
 // ---------------- API ----------------
 

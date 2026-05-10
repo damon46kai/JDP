@@ -14,11 +14,20 @@ app.use(express.static('public'));
 // ======================================
 let redis = null;
 let localCount = 0;
+//redenr
+// if (process.env.RENDER_REDIS_URL) {
+//   const Redis = require('ioredis');
+//   redis = new Redis(process.env.RENDER_REDIS_URL);
+//   console.log('✅ 线上 Redis 连接成功');
+// }
 
-if (process.env.RENDER_REDIS_URL) {
-  const Redis = require('ioredis');
-  redis = new Redis(process.env.RENDER_REDIS_URL);
-  console.log('✅ 线上 Redis 连接成功');
+if (process.env.KV_REST_API_URL) {
+  const { createClient } = require('@vercel/kv');
+  const redis = createClient({
+    url: process.env.KV_REST_API_URL,
+    token: process.env.KV_REST_API_TOKEN
+  });
+  // 后续 incr、get 等用 redis
 }
 
 // 增加访问量
