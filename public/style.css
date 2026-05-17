@@ -55,7 +55,7 @@
     40%  { opacity: 1; transform: scale(1); }
     70%  { opacity: 1; transform: scale(1); }
     100% { opacity: 0; transform: scale(0.9); 
-     visibility: hidden;}
+     visibility: visible;}
   }
 
   /* ======================
@@ -132,6 +132,14 @@
      /* ✅ 修复闪烁核心代码 */
     position: relative;
   }
+  /* 移动端使用更明显的透明效果 */
+@media (max-width: 768px) {
+  .note {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+}
 
 
       /* 上行默认低层级 */
