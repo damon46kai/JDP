@@ -1,34 +1,32 @@
+// 保留你原来的全部逻辑，只修复错误
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+
+// 关键修复：前端路径正确指向 frontend 文件夹
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // ======================================
-// 线上 Render Redis 访问统计
+// 线上 Render Redis 访问统计（保留你的逻辑）
 // ======================================
 let redis = null;
 let localCount = 0;
-//redenr
-// if (process.env.RENDER_REDIS_URL) {
-//   const Redis = require('ioredis');
-//   redis = new Redis(process.env.RENDER_REDIS_URL);
-//   console.log('✅ 线上 Redis 连接成功');
-// }
 
-if (process.env.KV_REST_API_URL) {
-  const { createClient } = require('@vercel/kv');
-  const redis = createClient({
-    url: process.env.KV_REST_API_URL,
-    token: process.env.KV_REST_API_TOKEN
-  });
-  // 后续 incr、get 等用 redis
-}
+// 关闭 Vercel KV 代码（避免报错）
+// if (process.env.KV_REST_API_URL) {
+//   const { createClient } = require('@vercel/kv');
+//   const redis = createClient({
+//     url: process.env.KV_REST_API_URL,
+//     token: process.env.KV_REST_API_TOKEN
+//   });
+// }
 
 // 增加访问量
 async function addVisit() {
@@ -62,6 +60,11 @@ app.get('/api/count', async (req, res) => {
   }
 });
 
+// 首页加载前端
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
+
 app.listen(PORT, () => {
-  console.log('🚀 线上服务已启动');
+  console.log('🚀 服务已启动 on Render');
 });
