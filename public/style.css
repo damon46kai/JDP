@@ -148,6 +148,7 @@
   }
   /* 手机触摸按压 */
   @media (max-width: 768px) {
+      .note:hover
       .note:active {
           background: rgba(255, 255, 255, 0.15);
           border-color: rgba(255, 255, 255, 0.2);
