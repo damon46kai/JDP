@@ -137,7 +137,8 @@
    
     .note:nth-child(n+5){z-index:2;} */
 
-   .note:hover
+   .note:hover,
+      .note:active
  {
      /* ✅ 只在 hover/active 时提升层级，避免平时遮挡标题 */
     background: rgba(255, 255, 255, 0.15);
@@ -148,7 +149,7 @@
   }
   /* 手机触摸按压 */
   @media (max-width: 768px) {
-      .note:hover
+      .note:hover,
       .note:active {
           background: rgba(255, 255, 255, 0.15);
           border-color: rgba(255, 255, 255, 0.2);
