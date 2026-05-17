@@ -68,7 +68,7 @@
     animation: containerShow 1s ease forwards;
     animation-delay: 2.2s;
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
   }
 
   @keyframes containerShow {
@@ -108,7 +108,7 @@
     grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
     gap: 32px;
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
 
     /* margin-top: 10px; */
   }
@@ -137,14 +137,25 @@
    
     .note:nth-child(n+5){z-index:2;} */
 
-   .note:hover {
+   .note:hover
+ {
+     /* ✅ 只在 hover/active 时提升层级，避免平时遮挡标题 */
     background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.25);
     transform: translateY(0);
     /* z-index: 999 !important; */
     box-shadow: 0 12px 40px rgba(0,0,0,0.35);
   }
-
+  /* 手机触摸按压 */
+  @media (max-width: 768px) {
+      .note:active {
+          background: rgba(255, 255, 255, 0.15);
+          border-color: rgba(255, 255, 255, 0.2);
+          transform: translateY(0);
+          z-index: 10 !important;
+          box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+      }
+  }
   @keyframes notePop {
     from { transform: translateY(30px); opacity: 0; }
     to   { transform: translateY(0); opacity: 1; }
