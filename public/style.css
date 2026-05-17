@@ -136,8 +136,8 @@
     @media (max-width: 768px) {
       .note {
         background: rgba(255, 255, 255, 0.12); /* 稍微提高不透明度 */
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        /* backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px); */
         transition: none; /* 手机端禁用过渡动画，更流畅 */
       }
     
