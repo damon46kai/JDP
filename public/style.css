@@ -131,6 +131,9 @@
 
      /* ✅ 修复闪烁核心代码 */
     position: relative;
+
+     cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
   }
 /* 
     .note:nth-child(-n+4){z-index:1;}
@@ -154,8 +157,10 @@
           background: rgba(255, 255, 255, 0.15);
           border-color: rgba(255, 255, 255, 0.2);
           transform: translateY(0);
-          z-index: 10 !important;
+          z-index: 10;
           box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+          /* 缩短active停留时长 */
+          transition-duration: 0.2s;
       }
   }
   @keyframes notePop {
