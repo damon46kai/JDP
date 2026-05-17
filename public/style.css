@@ -125,19 +125,24 @@
 
     box-shadow: 0 8px 32px rgba(0,0,0,0.25);
     
-    opacity: 0;
+    opacity: 1;
     animation: notePop 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     transition: all 0.3s ease;
 
      /* ✅ 修复闪烁核心代码 */
     position: relative;
   }
-  /* 移动端使用更明显的透明效果 */
+/* 移动端优化 */
 @media (max-width: 768px) {
   .note {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    background: rgba(255, 255, 255, 0.12); /* 稍微提高不透明度 */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: none; /* 手机端禁用过渡动画，更流畅 */
+  }
+  
+  .note:hover {
+    transform: none; /* 手机端禁用 hover 上浮效果 */
   }
 }
 
@@ -151,14 +156,14 @@
     background: rgba(255, 255, 255, 0.16);
     border-color: rgba(255, 255, 255, 0.22);
     transform: translateY(0);
-    z-index: 999 !important;
+    /* z-index: 999 !important; */
     box-shadow: 0 12px 40px rgba(0,0,0,0.35);
   }
 
-  @keyframes notePop {
+  /* @keyframes notePop {
     from { transform: translateY(30px); opacity: 0; }
     to   { transform: translateY(0); opacity: 1; }
-  }
+  } */
 
  .note h2 {
   font-size: 24px;
