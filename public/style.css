@@ -119,8 +119,8 @@
 
     /* 彩色磨砂玻璃（统一好看、不刺眼、高级） */
     background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(12px);
+    /* backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(12px); */
     border: 1px solid rgba(255, 255, 255, 0.1);
 
     box-shadow: 0 8px 32px rgba(0,0,0,0.25);
@@ -133,28 +133,27 @@
     position: relative;
   }
 /* 移动端优化 */
-@media (max-width: 768px) {
-  .note {
-    background: rgba(255, 255, 255, 0.12); /* 稍微提高不透明度 */
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    transition: none; /* 手机端禁用过渡动画，更流畅 */
-  }
-  
-  .note:hover {
-    transform: none; /* 手机端禁用 hover 上浮效果 */
-  }
-}
+    @media (max-width: 768px) {
+      .note {
+        background: rgba(255, 255, 255, 0.12); /* 稍微提高不透明度 */
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        transition: none; /* 手机端禁用过渡动画，更流畅 */
+      }
+    
+    /* .note:hover {
+      transform: none;
+    } */
+    }
 
-
-      /* 上行默认低层级 */
+/* 
     .note:nth-child(-n+4){z-index:1;}
-    /* 第五个及以后默认高层级 */
-    .note:nth-child(n+5){z-index:2;}
+   
+    .note:nth-child(n+5){z-index:2;} */
 
    .note:hover {
-    background: rgba(255, 255, 255, 0.16);
-    border-color: rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
     transform: translateY(0);
     /* z-index: 999 !important; */
     box-shadow: 0 12px 40px rgba(0,0,0,0.35);
