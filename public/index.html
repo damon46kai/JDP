@@ -6,21 +6,42 @@
   <title>Jane Doe's Pegboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div class="splash-title">Jane Doe's Pegboard</div> 
+  <div class="splash-title">Jane Doe's Pegboard</div>
   <div class="container">
     <div class="title">
       <h1><span class="highlight">Jane Doe's Pegboard</span></h1>
     </div>
 
     <div class="notes-grid">
+      <div class="ib-dropdown note blue has-dropdown">
+        <h2>Investment Banking</h2>
+          <span class="drop-trigger">Documents & links </span>
+          <div class="drop-list">
+            <a href="https://www.goldmansachs.com/" target="_blank">Goldman Sachs</a>
+            <a href="https://www.morganstanley.com/" target="_blank">Morgan Stanley</a>
+            <a href="https://www.ubs.com/" target="_blank">UBS</a>
+            <a href="https://www.barclays.com/" target="_blank">BARCLAYS</a>
+             <!-- <a href="https://www.db.com" target="_blank">Deutsche Bank</a> -->
+        </div>
+      </div>
       <div class="note yellow">
         <h2>Dev Tools</h2>
         <p>Development module for coding tools</p>
       </div>
-      <div class="note blue">
+      <div class="note">
         <h2>AI Tools</h2>
-        <p>AI & automation resources hub</p>
+        <p></p>
+        <div class="ib-dropdown">
+          <span class="drop-trigger">AI & automation resources hub</span>
+          <div class="drop-list">
+            <a href="https://www.doubao.com/" target="_blank">Doubao</a>
+            <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a>
+            <a href="https://chat.openai.com/" target="_blank">ChatGPT</a>
+            <a href="https://www.qianwen.com/?source=tongyigw" target="_blank">Tongyi</a>
+          </div>
+        </div>
       </div>
       <div class="note pink">
         <h2>Design</h2>
@@ -30,25 +51,53 @@
         <h2>Productivity</h2>
         <p>Workflow & efficiency tools</p>
       </div>
-      <div class="note white">
-        <h2>References</h2>
-        <p>Documents & learning links</p>
-      </div>
-           <!-- <div class="note white">
+      <!-- <div class="note purple">
+        <h2>Career</h2>
+        <p>Job search & career development</p>
+      </div> -->
+      <!-- <div class="note white">
         <h2>References</h2>
         <p>Documents & learning links</p>
       </div> -->
     </div>
   </div>
-<script>
-  fetch('/api/visit')
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('count').textContent = data.total;
-    });
+  <script>
+    fetch('/api/visit')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('count').textContent = data.total;
+      });
 
-  // 每次访问 +1
-  fetch('/api/visit');
-</script>
+    // 每次访问 +1
+    fetch('/api/visit');
+  </script>
 </body>
+<script>
+// 访问统计原有代码保留
+let tempCount = 0;
+
+fetch('/api/visit')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('count').textContent = data.total;
+  });
+
+fetch('/api/visit');
+
+// 下拉点击切换逻辑
+document.querySelectorAll('.drop-trigger').forEach(trigger => {
+  trigger.addEventListener('click', e => {
+    const list = trigger.nextElementSibling;
+    list.classList.toggle('show');
+  });
+});
+
+document.addEventListener('click', e => {
+  if(!e.target.closest('.ib-dropdown')){
+    document.querySelectorAll('.drop-list').forEach(list=>{
+      list.classList.remove('show');
+    });
+  }
+});
+</script>
 </html>
