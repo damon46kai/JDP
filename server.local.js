@@ -29,9 +29,8 @@ app.use(express.static('public'));
 // 临时内存计数（重启服务器会清零，适合本地调试）
 let tempCount = 0;
 
-// ---------------- API ----------------
+// ---------------- API --------------
 
-// 首页测试
 app.get('/', (req, res) => {
   res.send('✅ 本地服务器启动成功！http://localhost:3000');
 });
@@ -51,3 +50,4 @@ app.get('/api/count', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 本地服务器运行在：http://localhost:${PORT}`);
 });
+
