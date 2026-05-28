@@ -176,7 +176,7 @@
 
   /* 大标题 100% 同款原色（不动！） */
   background: linear-gradient(90deg, #4a8cf7, #ff6b8b, #f8c838);
-  background-size: 400% 100%; /* 回到标准尺寸，不拉伸 */
+  background-size: 300% 100%; /* 回到标准尺寸，不拉伸 */
 
    /* ✅ 直接在这里写，默认就停在你的专属位置，不播放动画 */
   background-position: var(--end-pos) center;
