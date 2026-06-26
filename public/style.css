@@ -202,13 +202,15 @@
 .note:nth-child(2) h2 { --end-pos: 30%; }
 .note:nth-child(3) h2 { --end-pos: 55%; }
 .note:nth-child(4) h2 { --end-pos: 70%; }
-.note:nth-child(5) h2 { --end-pos: 100%; }
+.note:nth-child(5) h2 { --end-pos: 85%; }
+.note:nth-child(6) h2 { --end-pos: 100%; }
 /* ========== 便签依次弹入动画（顺序入场） ========== */
 .note:nth-child(1) { animation-delay: 2.4s; }
 .note:nth-child(2) { animation-delay: 2.5s; }
 .note:nth-child(3) { animation-delay: 2.6s; }
 .note:nth-child(4) { animation-delay: 2.7s; }
 .note:nth-child(5) { animation-delay: 2.8s; }
+.note:nth-child(6) { animation-delay: 2.9s; }
 
   /* 便签内容：浅色白字，更高级 */
   .note p {
