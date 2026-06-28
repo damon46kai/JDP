@@ -5,6 +5,10 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
+  :root {
+  --btn-opacity: 0.9; /* You can adjust this value from 0 ~ 1 */
+  }
+
   /* 背景 */
   body {
     background-color: #2a2929;
@@ -266,4 +270,89 @@
 .drop-list a:hover {
   background: rgba(255,255,255,0.1);
   color: #fff;
+}
+
+.contributor-call {
+  max-width: 1100px;
+  margin: 60px auto 40px;
+  padding: 32px 28px;
+  border-radius: 22px;
+  /* background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25); */
+  text-align: center;
+  opacity: 0;
+  animation: notePop 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 3s;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.contributor-call:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+
+/* Rainbow gradient heading same as your note titles */
+.contributor-call h3 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, #4a8cf7, #ff6b8b, #f8c838);
+  background-size: 300% 100%;
+  background-position: 50% center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: flowGradient 1.8s ease-in-out infinite alternate;
+  animation-delay: 3.1s;
+  --end-pos: 50%;
+}
+
+/* Keep your exact text color rule */
+.contributor-call p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 22px;
+}
+
+/* Colorful hover button matching theme */
+/* .contact-btn {
+  display: inline-block;
+  padding: 11px 26px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgba(74, 140, 247, var(--btn-opacity)), rgba(255, 107, 139, var(--btn-opacity)), rgba(248, 200, 56, var(--btn-opacity)));
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+} */
+
+.contact-btn {
+  display: inline-block;
+  padding: 11px 26px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgba(74, 140, 247, var(--btn-opacity)), rgba(255, 107, 139, var(--btn-opacity)), rgba(248, 200, 56, var(--btn-opacity)));
+  color: #fff;
+  text-decoration: none;
+  font-size:16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+}
+
+.contact-btn:hover {
+  filter: brightness(0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(74, 140, 247, 0.3);
 }
