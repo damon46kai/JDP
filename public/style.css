@@ -6,7 +6,7 @@
   }
 
   :root {
-  --btn-opacity: 0.9; /* You can adjust this value from 0 ~ 1 */
+  --btn-opacity: 0.7; /* You can adjust this value from 0 ~ 1 */
   }
 
   /* 背景 */
@@ -342,7 +342,7 @@
   background: linear-gradient(90deg, rgba(74, 140, 247, var(--btn-opacity)), rgba(255, 107, 139, var(--btn-opacity)), rgba(248, 200, 56, var(--btn-opacity)));
   color: #fff;
   text-decoration: none;
-  font-size:16px;
+  font-size:15px;
   font-weight: 600;
   transition: all 0.3s ease;
   border: none;
