@@ -12,74 +12,73 @@
   <div class="container">
     <div class="title">
       <h1><span class="highlight">Jane Doe's Pegboard</span></h1>
+      <!-- 补上访问统计显示标签 -->
+      <!-- <p>Total Visits: <span id="count">0</span></p> -->
     </div>
 
     <div class="notes-grid">
-      <!-- 修正嵌套结构 -->
+      <!-- Investment Banking 下拉卡片 -->
       <div class="note blue has-dropdown">
         <h2>Investment Banking</h2>
         <div class="ib-dropdown">
-          <span class="drop-trigger">Documents & links </span>
+          <span class="drop-trigger">Documents & links</span>
           <div class="drop-list">
             <a href="https://www.goldmansachs.com/" target="_blank">Goldman Sachs</a>
             <a href="https://www.morganstanley.com/" target="_blank">Morgan Stanley</a>
             <a href="https://www.ubs.com/" target="_blank">UBS</a>
-            <a href="https://www.barclays.com/" target="_blank">BARCLAYS</a>
+            <a href="https://www.barclays.com/" target="_blank">Barclays</a>
           </div>
         </div>
       </div>
-      <div class="note green">
-  <h2>FAANG</h2>
-  <p></p>
 
-  <!-- FAANG 下拉菜单 -->
-  <div class="ib-dropdown">
-    <span class="drop-trigger">Workflow & efficiency</span>
-    <div class="drop-list">
-      <a href="https://jobs.nvidia.com/careers" target="_blank">Nvidia Careers</a>
-      <a href="https://www.metacareers.com/" target="_blank">Meta Careers</a>
-      <a href="https://www.apple.com/jobs/" target="_blank">Apple Careers</a>
-      <a href="https://www.amazon.jobs/" target="_blank">Amazon Careers</a>
-      <a href="https://careers.google.cn/locations/" target="_blank">Google Careers</a>
-      <a href="https://explore.jobs.netflix.net/careers" target="_blank">Netflix Careers</a>
-    </div>
-  </div>
-</div>
-      <div class="note yellow">
+      <!-- FAANG 下拉卡片：结构完全统一 -->
+        <div class="note has-dropdown">
+        <h2>FAANG</h2>
+        <div class="ib-dropdown">
+          <span class="drop-trigger">Career Links</span>
+          <div class="drop-list">
+            <a href="https://jobs.nvidia.com/careers?location=Canada" target="_blank">NVIDIA Careers</a>
+            <a href="https://www.metacareers.com/" target="_blank">Meta Careers</a>
+            <a href="https://www.apple.com/jobs/" target="_blank">Apple Careers</a>
+            <a href="https://www.amazon.jobs/" target="_blank">Amazon Careers</a>
+            <a href="https://careers.google.cn/locations/" target="_blank">Google Careers</a>
+            <a href="https://explore.jobs.netflix.net/careers" target="_blank">Netflix Careers</a>
+          </div>
+        </div>
+      </div>
+
+       <div class="note yellow">
         <h2>Dev Tools</h2>
         <p>Development module for coding tools</p>
       </div>
-      <div class="note">
+
+ 
+      <!-- AI Tools：统一加上 has-dropdown -->
+      <div class="note has-dropdown">
         <h2>AI Tools</h2>
-        <p></p>
         <div class="ib-dropdown">
           <span class="drop-trigger">AI & automation resources hub</span>
           <div class="drop-list">
+            <a href="https://chat.openai.com/" target="_blank">ChatGPT</a>
             <a href="https://www.doubao.com/" target="_blank">Doubao</a>
             <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a>
-            <a href="https://chat.openai.com/" target="_blank">ChatGPT</a>
-            <a href="https://www.qianwen.com/?source=tongyigw" target="_blank">Tongyi</a>
           </div>
         </div>
       </div>
+
+ 
+
       <div class="note pink">
         <h2>Design</h2>
         <p>Design resources & assets</p>
       </div>
+
       <div class="note green">
         <h2>Productivity</h2>
         <p>Workflow & efficiency tools</p>
       </div>
-      
-      <!-- <div class="note purple">
-        <h2>Career</h2>
-        <p>Job search & career development</p>
-      </div> -->
-      <!-- <div class="note white">
-        <h2>References</h2>
-        <p>Documents & learning links</p>
-      </div> -->
     </div>
+
   </div>
 
 <section class="contributor-call">
@@ -88,45 +87,65 @@
   <a href="mailto:q223yu@waterloo.ca" class="contact-btn">Get In Touch</a>
 </section>
 
-
-  <script>
-    fetch('/api/visit')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('count').textContent = data.total;
-      });
-
-    // 每次访问 +1
-    fetch('/api/visit');
-  </script>
-</body>
 <script>
-// 访问统计原有代码保留
-let tempCount = 0;
-
-
+// 访问统计只保留一次
 fetch('/api/visit')
   .then(res => res.json())
   .then(data => {
     document.getElementById('count').textContent = data.total;
   });
-
 fetch('/api/visit');
 
-// 下拉点击切换逻辑
-document.querySelectorAll('.drop-trigger').forEach(trigger => {
-  trigger.addEventListener('click', e => {
-    const list = trigger.nextElementSibling;
-    list.classList.toggle('show');
+// 保存下拉原本的父容器，用于鼠标离开时还原位置
+document.querySelectorAll('.ib-dropdown').forEach(dropWrap => {
+  const list = dropWrap.querySelector('.drop-list');
+  // 缓存原始父节点
+  list._originParent = dropWrap;
+
+  const trigger = dropWrap.querySelector('.drop-trigger');
+  trigger.addEventListener('mouseenter', function () {
+    // 如果已经在 body 里，直接显示，不再重复移动
+    if (list.parentElement === document.body) {
+      const rect = this.getBoundingClientRect();
+      list.style.left = rect.left + 'px';
+      list.style.top = rect.bottom + 'px';
+      list.classList.add('show');
+      return;
+    }
+
+    // 第一次才移动到 body
+    const rect = this.getBoundingClientRect();
+    document.body.append(list);
+    list.style.position = 'fixed';
+    list.style.left = rect.left + 'px';
+    list.style.top = rect.bottom + 'px';
+    list.classList.add('show');
   });
+
+  // 鼠标离开下拉区域，关闭并还原到原容器（防止重复挂载）
+  // dropWrap.addEventListener('mouseleave', function () {
+  //   list.classList.remove('show');
+  //   // 延迟一会移回去，保证点击链接不会瞬间消失
+  //   setTimeout(() => {
+  //     if (!list.classList.contains('show')) {
+  //       list._originParent.appendChild(list);
+  //     }
+  //   }, 150);
+  // });
 });
 
+// 点击空白关闭所有下拉
 document.addEventListener('click', e => {
-  if(!e.target.closest('.ib-dropdown')){
-    document.querySelectorAll('.drop-list').forEach(list=>{
+  if (!e.target.closest('.ib-dropdown') && !e.target.closest('.drop-list')) {
+    document.querySelectorAll('.drop-list').forEach(list => {
       list.classList.remove('show');
+      // 关闭时放回原父容器
+      if (list._originParent) {
+        list._originParent.appendChild(list);
+      }
     });
   }
 });
 </script>
+</body>
 </html>

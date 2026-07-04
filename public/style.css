@@ -152,6 +152,7 @@
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.25);
     transform: translateY(0);
+     /* z-index: 10; */
     /* z-index: 999 !important; */
     box-shadow: 0 12px 40px rgba(0,0,0,0.35);
   }
@@ -221,6 +222,10 @@
     font-size: 15px;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
+    overflow: visible;
+  isolation: isolate;
+  z-index: 1;
+  position: relative;
   }
   .note.has-dropdown {
   z-index: 10 !important;
@@ -254,7 +259,7 @@
   padding: 8px 0;
   min-width: 160px;
   display: none;
-  z-index: 9999;
+  z-index: 999999;
 }
 .drop-list.show {
   display: block;
@@ -277,21 +282,24 @@
   margin: 60px auto 40px;
   padding: 32px 28px;
   border-radius: 22px;
-  /* background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.25); */
   text-align: center;
   opacity: 0;
   animation: notePop 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   animation-delay: 3s;
   transition: all 0.3s ease;
   cursor: default;
+
+  /* 关键两行，让z-index生效并隔离堆叠 */
+  position: relative;
+  isolation: isolate;
+  z-index: 0;
 }
 
 .contributor-call:hover {
   background: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.25);
   box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  z-index: 0; /* hover 绝不升层 */
 }
 
 /* Rainbow gradient heading same as your note titles */
@@ -348,11 +356,16 @@
   border: none;
   pointer-events: auto;
   position: relative;
-  z-index: 10;
+  /* z-index: 10; */
 }
 
 .contact-btn:hover {
   filter: brightness(0.8);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(74, 140, 247, 0.3);
+}
+
+/* 只要鼠标悬浮当前带下拉卡片，直接拉满层级，盖住所有其他卡片 */
+.note.has-dropdown:hover {
+  z-index: 99999 !important;
 }
